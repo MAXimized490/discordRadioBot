@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED 1
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install ffmpeg so we can access the internet radio stream.
-RUN apt-get update && apt-get install -y ffmpeg && apt-get clean
+RUN apt-get update && apt-get install -y ffmpeg libopus0 && apt-get clean
 
 # Set a working directory
 WORKDIR /app
