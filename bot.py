@@ -97,10 +97,10 @@ async def start_radio(ctx, useDefaultVolume, station_name=None):
     # Test to see if we've connected yet. This is better than assuming we've connected because sometimes there is a delay.
     try:
         await asyncio.wait_for(_wait_for_connection(vc), timeout=5.0)
-        except asyncio.TimeoutError:
-            await ctx.send(f"Timed out waiting for voice connection to {channel.name}!")
-            await vc.disconnect()
-            return
+    except asyncio.TimeoutError:
+        await ctx.send(f"Timed out waiting for voice connection to {channel.name}!")
+        await vc.disconnect()
+        return
 
     # Handle cases where we're somehow not connected and slipped past previous check.
     if not vc.is_connected():
