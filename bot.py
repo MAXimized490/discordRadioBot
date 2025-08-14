@@ -112,6 +112,11 @@ async def start_radio(ctx, useDefaultVolume, station_name=None):
     await ctx.send(f"Now playing the radio in {channel.name}!")
     print(f"Now playing the radio in {channel.name}.")
 
+# Simple delay function to help with checking connection.
+async def _wait_for_connection(vc):
+    while not vc.is_connected():
+        await asyncio.sleep(0.1)
+
 # Load the settings JSON file and return its parsed contents.
 def load_settings():
     # Check that settings file exists.
