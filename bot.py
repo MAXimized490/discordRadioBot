@@ -27,6 +27,11 @@ settings_file = "settings.json"
 if not BOT_TOKEN:
     raise ValueError("BOT_TOKEN environment variable is not set!")
 
+# Load Opus and make sure it's working
+discord.opus.load_opus()
+if not discord.opus.is_loaded():
+    raise RunTimeError('Opus failed to load')
+
 # --------------------
 # Define some Functions
 # --------------------
