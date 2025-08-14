@@ -1,11 +1,11 @@
 # Prerequisites
-import discord
-from discord.ext import commands
+import nextcord
+from nextcord.ext import commands
 import json
 import asyncio
 import os
 
-intents = discord.Intents.default()
+intents = nextcord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix="radio!", intents=intents)
 
@@ -28,8 +28,8 @@ if not BOT_TOKEN:
     raise ValueError("BOT_TOKEN environment variable is not set!")
 
 # Load Opus and make sure it's working
-discord.opus.load_opus("/usr/lib/x86_64-linux-gnu/libopus.so.0")
-if not discord.opus.is_loaded():
+nextcord.opus.load_opus("/usr/lib/x86_64-linux-gnu/libopus.so.0")
+if not nextcord.opus.is_loaded():
     raise RunTimeError('Opus failed to load')
 
 # --------------------
@@ -113,7 +113,7 @@ async def start_radio(ctx, useDefaultVolume, station_name=None):
         return
     
     # Start streaming the radio. Log if the remote stream ends (normally shouldn't happen).
-    vc.play(discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(stream_url), volume=actual_volume), after=lambda e: print(f"Stream ended: {e}"))
+    vc.play(nextcord.PCMVolumeTransformer(nextcord.FFmpegPCMAudio(stream_url), volume=actual_volume), after=lambda e: print(f"Stream ended: {e}"))
     await ctx.send(f"Now playing the radio in {channel.name}!")
     print(f"Now playing the radio in {channel.name}.")
 
@@ -312,7 +312,7 @@ async def on_voice_state_update(member, before, after):
     if member.bot:
         return
     # Find an instance of ourself where we are connected to the voice channel where this event occured.
-    bot_client_info = discord.utils.get(bot.voice_clients, guild=member.guild)
+    bot_client_info = nextcord.utils.get(bot.voice_clients, guild=member.guild)
     # If we are in a voice channel and that channel matches the one that was left by the event-triggering user...
     if bot_client_info and before.channel == bot_client_info.channel:
         #...and we are the last one in the voice channel...
