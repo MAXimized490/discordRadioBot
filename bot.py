@@ -28,7 +28,7 @@ if not BOT_TOKEN:
     raise ValueError("BOT_TOKEN environment variable is not set!")
 
 # Load Opus and make sure it's working
-discord.opus.load_opus('opus')
+discord.opus.load_opus("/usr/lib/x86_64-linux-gnu/libopus.so.0")
 if not discord.opus.is_loaded():
     raise RunTimeError('Opus failed to load')
 
