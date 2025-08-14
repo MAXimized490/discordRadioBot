@@ -1,5 +1,5 @@
 # Start with a base Python image.
-FROM python:3.10-slim
+FROM python:3.12.11-slim
 
 # Set environment variables for Python image.
 # Set PYTHONUNBUFFERED to non-zero so we get direct, unbuffered log outputs to the console.
